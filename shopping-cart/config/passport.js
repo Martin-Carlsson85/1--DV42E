@@ -71,7 +71,7 @@ passport.use('local.signin', new LocalStrategy({
         if (!user) {
             return done(null, false, {message: 'No user found.'});
         }
-        if (!user.validPassword(password)) {
+        if (!user.validPassword(password)) { //Ref. models/user
             return done(null, false, {message: 'Wrong password.'});
         }
         return done(null, user);

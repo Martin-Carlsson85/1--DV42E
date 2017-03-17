@@ -1,8 +1,10 @@
+//Check if there is an older cart before adding new items
 module.exports = function Cart(oldCart) {
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
 
+    //Function to add items to the cart
     this.add = function(item, id) {
         var storedItem = this.items[id];
         if (!storedItem) {

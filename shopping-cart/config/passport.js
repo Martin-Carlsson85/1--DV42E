@@ -2,7 +2,6 @@ var passport = require('passport');
 var User = require('../models/user');
 var LocalStrategy = require('passport-local').Strategy;
 
-//Here we store users in the session
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
@@ -19,7 +18,7 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, email, password, done) {
-    req.checkBody('email', 'Invalid email').notEmpty().isEmail(); //Validation
+    req.checkBody('email', 'Invalid email').notEmpty().isEmail();
     req.checkBody('password', 'Invalid password').notEmpty().isLength({min:4});
     var errors = req.validationErrors();
     if (errors) {
@@ -71,9 +70,9 @@ passport.use('local.signin', new LocalStrategy({
         if (!user) {
             return done(null, false, {message: 'No user found.'});
         }
-        if (!user.validPassword(password)) { //Ref. models/user
+        if (!user.validPassword(password)) {
             return done(null, false, {message: 'Wrong password.'});
         }
         return done(null, user);
-     });
- }));
+    });
+}));
